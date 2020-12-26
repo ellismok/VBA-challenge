@@ -1,0 +1,71 @@
+Sub Alphabetical_Stock_Table()
+    
+    Dim ws As Worksheet
+    
+    For Each ws In Worksheets
+        
+        ' Starting Point
+        Starting_Row = 2
+        Stock_Summary = 2
+        Total_Volume = 0
+        
+         ' Name the Stock Summary Columns
+            ws.Cells(1, 9).Value = "Ticker"
+            ws.Cells(1, 10).Value = "Yearly Change"
+            ws.Cells(1, 11).Value = "Percentage Change"
+            ws.Cells(1, 12).Value = "Total Volume"
+        
+                 ' Loop through Tickers (Abbv. of Stocks)
+                Last_Row = ws.Cells(Rows.Count, 1).End(xlUp).Row
+                For Row = Starting_Row To Last_Row
+            
+                    ' Grab Ticker
+                    Ticker_Name = ws.Cells(Row, 1)
+                    
+                    ' Grab Total Volume
+                    Total_Volume = Total_Volume + ws.Cells(Row, 3).Value
+                   
+                    ' Grab Yearly Change (Close Price - Open Price) & Percentage Change (Yearly Change / Open Price)
+                     If ws.Cells(Row + 1, 1) <> Ticker_Name Then
+                     Last_Row = Row
+                     Open_Price = (ws.Cells(Starting_Row, 3).Value)
+                     Close_Price = (ws.Cells(Last_Row, 6).Value)
+                     Year_Change = Close_Price - Open_Price
+                        If Open_Price = 0 Then
+                            Year_Change = 0
+                        Else
+                            Percent_Change = Year_Change / Open_Price
+                        End If
+                      ' Update Summary Table
+                      ws.Cells(Stock_Summary, 10).Value = Year_Change
+                      ws.Cells(Stock_Summary, 9).Value = Ticker_Name
+                      ws.Cells(Stock_Summary, 11).Value = Percent_Change
+                      ws.Cells(Stock_Summary, 12).Value = Total_Volume
+                     
+                     ' Color Red, if less than 0 or equal. Color Green, if greater than 0.
+                         If Year_Change <= 0 Then
+                             'color red
+                             ws.Cells(Stock_Summary, 10).Interior.Color = RGB(255, 0, 0)
+                         Else
+                            ' color green
+                            ws.Cells(Stock_Summary, 10).Interior.Color = RGB(0, 255, 0)
+                         End If
+                         
+                    'formating
+                         ws.Cells(Stock_Summary, 11).NumberFormat = "0.00%"
+                         
+                     'reset for the new ticker
+                     Starting_Row = Row + 1
+                     Total_Volume = 0
+                     Stock_Summary = Stock_Summary + 1
+                     
+                     
+                     End If
+                    
+                Next Row
+                
+       Next ws
+End Sub
+
+
+
