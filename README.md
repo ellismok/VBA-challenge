@@ -12,7 +12,9 @@ Analyzing stock market data using VBA scripting
 
 ### Stock market analyst
 
-![stock Market](Images/stockmarket.jpg)
+![2014 stock Market](2014.png)
+![2015 stock Market](2015.png)
+![2016 stock Market](2016 Reports.png)
 
 ## Thought Process
 - [x] Extract each Tickers by name, yearly change, percentage change, and total volume
