@@ -8,7 +8,7 @@ Analyzing stock market data using VBA scripting
 
 * [Test Data](Resources/alphabetical_testing.xlsx)
 
-* [Stock Data](Resources/Multiple_year_stock_data.xlsx)
+* [Stock Data](Multiple_year_stock_data.xlsx)
 
 ### Stock market analyst
 
